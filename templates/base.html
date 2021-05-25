@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href = "../static/css/style.css">
+        <script src="https://kit.fontawesome.com/92cbdcb18b.js" crossorigin="anonymous"></script>
+        
+    <body>
+        <h1>start-page</h1>
+        <div class = "list_set">
+            <a class="prev" onclick="on_click(-1)">&#10094;</a>
+            {% block content %} {% endblock %}
+            <a class="next" onclick="on_click(1)">&#10095;</a>
+        </div>
+
+        <script type="text/javascript" src="../static/js/list_cycle.js"></script>
+    </head>
+    </body>
+</html>

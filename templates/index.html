@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% for title, sublist in trello_dict %}
+        <div class = "list_container">
+            <div class = "list_header">{{ title }}</div>
+            <div class = "list_content">
+                {% for card in sublist %}
+                    <div class = "card"> {{ card }}
+                        <form method = "post" action = "http://127.0.0.1:5000/">
+                            <button class = "card_delete fas fa-times" type = "submit" value = "{{ card }}" name = "remove" onclick = "return confirm('Are you sure?')"></button>
+                        </form>
+                    </div>
+                {% endfor %}
+                <form name = "add" method = "post" action = "http://127.0.0.1:5000/">
+                    <input type= "hidden" name = "list_name" value = "{{ title }}">
+                    <input class = "card_add" type="text" placeholder = "new" name = "add"></input>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
