@@ -1,9 +1,10 @@
-var list_index = parseInt(sessionStorage.getItem('list_index'), 10);
-if (!list_index) {
-    var list_index = 0;
-}
+window.onload = function() {
+    var list_index = parseInt(sessionStorage.getItem('list_index'), 10);
+    if (!list_index) {
+        var list_index = 0;
+    }
 show_list(list_index);
-
+}
 
 function on_click(index) {
     show_list(list_index += index);

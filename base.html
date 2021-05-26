@@ -2,8 +2,12 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <link rel="stylesheet" href = "../static/css/style.css">
+        <link rel="stylesheet" href = "css/style.css">
         <script src="https://kit.fontawesome.com/92cbdcb18b.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="https://api.trello.com/1/client.js?key=ad16b3881276bec6ac47d39a77c62342"></script>
+        <script src="js/main.js"></script>
+        <script src="js/list_cycle.js"></script>
     </head>
     <body>
         <div class="main">
@@ -50,11 +54,11 @@
                     <a class="next_small" onclick="on_click(1)">&#10095;</a>
                 </div>
                 <a class="prev" onclick="on_click(-1)">&#10094;</a>
-                {% block content %} {% endblock %}
+                <div id="insert">
+
+                </div>
                 <a class="next" onclick="on_click(1)">&#10095;</a>
             </div> 
         </div>
-        <script src="../static/js/list_cycle.js"></script>
-        <script src="../static/js/main.js"></script>
     </body>
 </html>

@@ -7,9 +7,7 @@
             <div class = "list_content">
                 {% for card in sublist %}
                     <div class = "card"> {{ card }}
-                        <form method = "post" action = "http://127.0.0.1:5000/">
-                            <button class = "card_delete fas fa-times" type = "submit" value = "{{ card }}" name = "remove" onclick = "return confirm('Are you sure?')"></button>
-                        </form>
+                        <button class = "card_delete fas fa-times" type = "submit" onclick="card_remove()"></button>
                     </div>
                 {% endfor %}
                 <form autocomplete="off" name = "add" method = "post" action = "http://127.0.0.1:5000/">
