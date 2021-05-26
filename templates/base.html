@@ -4,16 +4,57 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href = "../static/css/style.css">
         <script src="https://kit.fontawesome.com/92cbdcb18b.js" crossorigin="anonymous"></script>
-        
-    <body>
-        <h1>start-page</h1>
-        <div class = "list_set">
-            <a class="prev" onclick="on_click(-1)">&#10094;</a>
-            {% block content %} {% endblock %}
-            <a class="next" onclick="on_click(1)">&#10095;</a>
-        </div>
-
-        <script type="text/javascript" src="../static/js/list_cycle.js"></script>
     </head>
+    <body>
+        <div class="main">
+            <div id = "container" class = "container">
+                <div id="date">
+                    <h2 id="date-text"></h2>
+                </div>
+                <div id="search-bar">
+                    <input id="search-bar-input"></input>
+                </div>
+                <div id="other-content">
+                    <div class = "sqr media">
+                        <h4>Media</h4>
+                        <a href = "https://www.youtube.com/">Youtube</a>
+                        <a href = "https://www.netflix.com/browse">Netflix</a>
+                        <a href = "https://www.twitch.tv/">Twitch</a>
+                        <a href = "https://animetake.tv/">Anime</a>
+                    </div>
+                    <div class = "sqr uni">
+                        <h4>Uni</h4>
+                        <a href = "https://my.unsw.edu.au/">MyUNSW</a>
+                        <a href = "https://moodle.telt.unsw.edu.au/">Moodle</a>
+                        <a href = "https://webcms3.cse.unsw.edu.au/dashboard">WebCMS</a>
+                        <a href = "https://outlook.office.com/mail/inbox">Outlook</a>
+                    </div>
+                    <div class = "sqr social">
+                        <h4>Social</h4>
+                        <a href = "https://twitter.com/home">Twitter</a>
+                        <a href = "https://www.reddit.com/">Reddit</a>
+                        <a href = "https://www.facebook.com/">Facebook</a>
+                    </div>
+                    <div class = "sqr other">
+                        <h4>Other</h4>
+                        <a href = "https://www.ozbargain.com.au/">OzBargain</a>
+                        <a href = "https://github.com/austlai">Github</a>
+                        <a href = "https://trello.com/b/afuI6MN3/general">Trello</a>
+                        <a href = "https://mail.google.com/mail/u/0/#inbox">Gmail</a>
+                    </div>
+                </div>
+            </div>
+            <div class = "list_set">
+                <div class= "hide_button">
+                    <a class="prev_small" onclick="on_click(-1)">&#10094;</a>
+                    <a class="next_small" onclick="on_click(1)">&#10095;</a>
+                </div>
+                <a class="prev" onclick="on_click(-1)">&#10094;</a>
+                {% block content %} {% endblock %}
+                <a class="next" onclick="on_click(1)">&#10095;</a>
+            </div> 
+        </div>
+        <script src="../static/js/list_cycle.js"></script>
+        <script src="../static/js/main.js"></script>
     </body>
 </html>

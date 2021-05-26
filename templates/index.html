@@ -12,7 +12,7 @@
                         </form>
                     </div>
                 {% endfor %}
-                <form name = "add" method = "post" action = "http://127.0.0.1:5000/">
+                <form autocomplete="off" name = "add" method = "post" action = "http://127.0.0.1:5000/">
                     <input type= "hidden" name = "list_name" value = "{{ title }}">
                     <input class = "card_add" type="text" placeholder = "new" name = "add"></input>
                 </form>

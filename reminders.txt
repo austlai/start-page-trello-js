@@ -1,0 +1,1 @@
+set max and min width for search bar for when scaling window aligns with squares
