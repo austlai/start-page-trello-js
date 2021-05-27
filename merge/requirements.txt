@@ -1,6 +1,0 @@
-py-trello
-flask
-requests
-requests-oauthlib
-python-dateutil
-pytz
