@@ -1,6 +1,7 @@
 window.onload = function() {
     this.initSearchBar()
     this.updateTimeHook()
+    this.main()
 }
 
 // functions controlling main content
@@ -99,7 +100,8 @@ async function trello_data() {
     return [card_array, list_names];    
 }
 
-async function card_add(list_title, card_string) {
+async function card_add(list_title, input_element) {
+    var card_string = input_element.value
     var board_member = await get_board_member_id();
     var board_id = board_member[0]; 
     var list_all = await get_lists(board_id);
@@ -114,24 +116,26 @@ async function card_add(list_title, card_string) {
         idList: list_id,
         pos: 'bottom'
     };
-    window.Trello.post('/cards/', new_card);
+    await window.Trello.post('/cards/', new_card);
+    location.reload();
 }
 
-async function card_remove() {
-    var result = confirm('Are you sure?')
-    if (result) {
-        var card_name = this.div;
-        console.log(card_name)
-        var board_member = await get_board_member_id();
-        var board_id = board_member[0]; 
-        var cards = await get_cards(board_id);
-        var card_id;
-        cards.forEach(card => {
-            if (card.name == card_name) {
-                card_id = card.id;
-            }
-        })
-        window.Trello.put(`/cards/${card_id}`, {closed: true});
+function card_remove(card_name) {
+    return async function() {
+        var result = confirm('Are you sure?')
+        if (result) {
+            var board_member = await get_board_member_id();
+            var board_id = board_member[0]; 
+            var cards = await get_cards(board_id);
+            var card_id;
+            cards.forEach(card => {
+                if (card.name == card_name) {
+                    card_id = card.id;
+                }
+            })
+            await window.Trello.put(`/cards/${card_id}`, {closed: true});
+            location.reload()
+        }
     }
 }
 
@@ -141,6 +145,7 @@ async function main() {
     var card_list = await trello_data(); //getrello
     var list_names = card_list[1];
     var card_names = card_list[0];
+    var body_tag = document.getElementById('bodyid');
     var insert = document.getElementById('insert');
     for (var list_name of list_names) {
         var list_container = document.createElement('div');
@@ -158,9 +163,25 @@ async function main() {
             card.className = 'card';
             card.innerHTML = card_name;
             list_content.append(card);
+            var button = document.createElement('button');
+            button.className = "card_delete fas fa-times"
+            button.type = "submit"
+            button.addEventListener('click', card_remove(card_name));
+            card.append(button);
         }
+        var add_input = document.createElement('input')
+        add_input.className = "card_add"
+        add_input.type = "text"
+        add_input.placeholder = "new"
+        add_input.autocomplete = "off"
+        add_input.addEventListener("keydown", function(event) {
+            if (event.key === "Enter" && add_input.value != '') {
+                card_add(list_name, add_input);
+            }
+        }); 
+        list_content.appendChild(add_input)
     }
-
+    var insert_js = document.createElement('script');
+    insert_js.src = 'js/list_cycle.js';
+    body_tag.appendChild(insert_js);
 }
-
-main()

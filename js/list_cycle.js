@@ -1,18 +1,23 @@
-window.onload = function() {
-    var list_index = parseInt(sessionStorage.getItem('list_index'), 10);
-    if (!list_index) {
-        var list_index = 0;
-    }
-show_list(list_index);
+// list_cycle functions
+
+var list_index = parseInt(sessionStorage.getItem('list_index'), 10);
+if (!list_index) {
+    var list_index = 0;
 }
+show_list(list_index);
+ 
 
 function on_click(index) {
     show_list(list_index += index);
     sessionStorage.setItem('list_index', list_index);
 }
 
+function get_list_element() {
+    return document.getElementsByClassName("list_container");
+}
+
 function show_list(index) {
-    var lists = document.getElementsByClassName("list_container");
+    var lists = get_list_element();
     if (index >= lists.length) {
         list_index = 0;
     }
@@ -24,10 +29,3 @@ function show_list(index) {
     }
     lists[list_index].style.display = "inline-block"
 }
-
-const node = document.getElementsByClassName("card_add");
-node.addEventListener("keydown", function(event) {
-    if (event.key === "Enter") {
-        document.add_card.submit();
-    }
-});
