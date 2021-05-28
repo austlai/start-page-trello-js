@@ -40,6 +40,9 @@ function updateTimeHook() {
 }
 
 //functions controlling trello data get
+
+var API_KEY = 'ad16b3881276bec6ac47d39a77c62342';
+
 var authenticationSuccess = function() {
     console.log('Successful authentication');
 };
@@ -48,17 +51,21 @@ var authenticationFailure = function() {
     console.log('Failed authentication');
 };
 
-window.Trello.authorize({
-    type: 'popup',
-    name: 'start-page',
-    scope: {
-      read: 'true',
-      write: 'true' },
-    expiration: 'never',
-    persist: true,
-    success: authenticationSuccess,
-    error: authenticationFailure
-});
+Trello.setKey(API_KEY);
+if (!localStorage.trello_token) {
+    window.Trello.authorize({
+        type: 'redirect',
+        name: 'start-page',
+        scope: {
+        read: 'true',
+        write: 'true' },
+        expiration: 'never',
+        persist: true,
+        success: authenticationSuccess,
+        error: authenticationFailure
+    });
+}
+Trello.setToken(localStorage.getItem('trello_token'));
 
 function get_boards() {return Trello.get(`/members/me/boards`);}
 
