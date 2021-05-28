@@ -5,7 +5,6 @@ if (!list_index) {
     var list_index = 0;
 }
 show_list(list_index);
- 
 
 function on_click(index) {
     show_list(list_index += index);
@@ -29,3 +28,4 @@ function show_list(index) {
     }
     lists[list_index].style.display = "inline-block"
 }
+

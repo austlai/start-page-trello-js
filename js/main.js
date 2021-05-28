@@ -52,7 +52,7 @@ var authenticationFailure = function() {
 };
 
 Trello.setKey(API_KEY);
-if (!localStorage.trello_token) {
+/*if (!localStorage.trello_token) {
     window.Trello.authorize({
         type: 'redirect',
         name: 'start-page',
@@ -60,12 +60,15 @@ if (!localStorage.trello_token) {
         read: 'true',
         write: 'true' },
         expiration: 'never',
-        persist: true,
+        interactive: true,
+        persist: false,
         success: authenticationSuccess,
         error: authenticationFailure
     });
 }
-Trello.setToken(localStorage.getItem('trello_token'));
+Trello.setToken(localStorage.getItem('trello_token'));*/
+
+Trello.setToken('53d6411299f95d817cc9650554df46a44248fb469f4945e1d5d732a13fd9361c')
 
 function get_boards() {return Trello.get(`/members/me/boards`);}
 
@@ -107,8 +110,7 @@ async function trello_data() {
     return [card_array, list_names];    
 }
 
-async function card_add(list_title, input_element) {
-    var card_string = input_element.value
+async function card_add(list_title, card_string) {
     var board_member = await get_board_member_id();
     var board_id = board_member[0]; 
     var list_all = await get_lists(board_id);
@@ -152,7 +154,7 @@ async function main() {
     var card_list = await trello_data(); //getrello
     var list_names = card_list[1];
     var card_names = card_list[0];
-    var body_tag = document.getElementById('bodyid');
+    var body_tag = document.getElementById('html');
     var insert = document.getElementById('insert');
     for (var list_name of list_names) {
         var list_container = document.createElement('div');
@@ -181,14 +183,20 @@ async function main() {
         add_input.type = "text"
         add_input.placeholder = "new"
         add_input.autocomplete = "off"
-        add_input.addEventListener("keydown", function(event) {
-            if (event.key === "Enter" && add_input.value != '') {
-                card_add(list_name, add_input);
+        add_input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter" && this.value != "") {
+                card_add(this.parentElement.previousSibling.innerHTML, this.value);
             }
         }); 
         list_content.appendChild(add_input)
     }
     var insert_js = document.createElement('script');
     insert_js.src = 'js/list_cycle.js';
-    body_tag.appendChild(insert_js);
+    body_tag.append(insert_js);
 }
+document.addEventListener("DOMContentLoaded", function() { 
+    document.getElementById("prev").addEventListener('click', function() {on_click(-1);});
+    document.getElementById("next").addEventListener('click', function() {on_click(1);});
+    document.getElementById("prev_small").addEventListener('click', function() {on_click(-1);});
+    document.getElementById("next_small").addEventListener('click', function() {on_click(1);});
+});
