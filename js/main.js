@@ -74,7 +74,7 @@ function get_boards() {return Trello.get(`/members/me/boards`);}
 
 async function get_board_member_id() {
     var board_all = await get_boards();
-    var board_select = board_all[1];
+    var board_select = board_all[0]; // SELECTING FIRST BOARD
     board_id = board_select.id;
     member_id = board_select.idMemberCreator;
     return [board_id, member_id];
