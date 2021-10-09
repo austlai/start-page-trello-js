@@ -204,6 +204,7 @@ h4 {
     margin: 7px 0px 7px 0px;
     padding: 4px 13px 4px 4px;
     min-height: 20px;
+    min-width: 169px;
     position: relative;
     text-decoration: none;
     z-index: 0;
