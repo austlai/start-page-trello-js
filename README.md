@@ -1,4 +1,5 @@
 # start-page-trello-js
-clone of start-page-trello-flask without the need for flask server (hopefully)
 
-basically just a rewrite in javascript
+web page for my browser home page/new tab page
+
+- Added trello functionality for first board
