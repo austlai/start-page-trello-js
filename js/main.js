@@ -52,7 +52,8 @@ var authenticationFailure = function() {
 };
 
 Trello.setKey(API_KEY);
-/*if (!localStorage.trello_token) {
+
+if (!localStorage.trello_token) {
     window.Trello.authorize({
         type: 'redirect',
         name: 'start-page',
@@ -66,9 +67,7 @@ Trello.setKey(API_KEY);
         error: authenticationFailure
     });
 }
-Trello.setToken(localStorage.getItem('trello_token'));*/
-
-Trello.setToken('53d6411299f95d817cc9650554df46a44248fb469f4945e1d5d732a13fd9361c')
+Trello.setToken(localStorage.getItem('trello_token'));
 
 function get_boards() {return Trello.get(`/members/me/boards`);}
 
